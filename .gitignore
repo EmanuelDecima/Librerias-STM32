@@ -1,0 +1,43 @@
+# =========================================
+# STM32CubeIDE / Eclipse
+# =========================================
+.settings/
+.metadata/
+.loadpath
+*.launch
+
+# Archivos de usuario de Eclipse/STM32CubeIDE
+*.project
+*.cproject
+
+# =========================================
+# Compilación y salida
+# =========================================
+/Debug/
+/Release/
+/build/
+/out/
+/bin/
+/obj/
+/lib/
+
+# Archivos generados por compilación
+*.o
+*.d
+*.elf
+*.hex
+*.map
+*.list
+*.lst
+*.srec
+*.bin
+
+# =========================================
+# Archivos temporales / del sistema
+# =========================================
+*.log
+*.swp
+*.bak
+*.tmp
+*.DS_Store
+Thumbs.db
