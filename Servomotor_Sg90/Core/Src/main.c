@@ -24,6 +24,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "ServomotorSg90.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,12 +52,6 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
-
-#define SERVO_MIN 500  // 1 ms
-#define SERVO_MAX 2500  // 2 ms
-
-void Servo_SetAngle(uint8_t angle);
 
 /* USER CODE END PFP */
 
@@ -95,8 +91,11 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
+
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
-  int i=0;
+  Servo_HandleTypeDef servo1;
+  Servo_Init(&servo1, &htim4, TIM_CHANNEL_2, 500, 2500);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -104,15 +103,15 @@ int main(void)
   while (1)
   {
 	  for(int i=0; i<180;i++){
-		  Servo_SetAngle(i);
+		  Servo_SetAngle(&servo1, i);
 		  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-		  HAL_Delay(10);
+		  HAL_Delay(20);
 	  }
 	  HAL_Delay(2000);
 	  for(int i=180; i>0;i--){
-		  Servo_SetAngle(i);
+		  Servo_SetAngle(&servo1, i);
 		  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-		  HAL_Delay(10);
+		  HAL_Delay(20);
 	  }
 	  HAL_Delay(2000);
 
@@ -166,13 +165,6 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
-#include "stm32f4xx_hal.h"
-
-void Servo_SetAngle(uint8_t angle){
-    if (angle > 180) angle = 180;
-    uint32_t pulse = SERVO_MIN + ((SERVO_MAX - SERVO_MIN) * angle) / 180;
-    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, pulse);
-}
 /* USER CODE END 4 */
 
 /**
