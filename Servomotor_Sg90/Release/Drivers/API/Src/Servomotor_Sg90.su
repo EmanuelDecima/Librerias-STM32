@@ -1,3 +1,0 @@
-../Drivers/API/Src/Servomotor_Sg90.c:12:6:Servo_Init	0	static
-../Drivers/API/Src/Servomotor_Sg90.c:20:6:Servo_SetRange	0	static
-../Drivers/API/Src/Servomotor_Sg90.c:26:6:Servo_SetAngle	16	static
